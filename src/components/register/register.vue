@@ -57,12 +57,13 @@
                 <input type="text" name="renum" id="renum" placeholder="验证码"/>
                 <button class="u-btn">发送验证码</button>
             </div>
-            <div class="input-group">
+            <div class="input-group check-agree">
                 <input type="checkbox" name="agree" id="agree">
-                本人确认所填资料真实有效<span style="color:red;">审核最长不超过24小时</span>
+                本人确认所填资料真实有效 <span style="color:red;">审核最长不超过24小时</span>
             </div>
         </div>
-        <button class="u-btn">提交</button>
+        <!-- <router-link :to="" class="reg-btn u-btn" tag="button">提交</router-link> -->
+        <button class="reg-btn u-btn">提交</button>
     </div>
 </template>
 <script>
@@ -75,10 +76,26 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+@import "~common/stylus/variable"
+
 .register-div
     width 100%
     position relative
     height 100%
+    overflow-x hidden
+    .input-group
+        box-sizing border-box
+        width 100%
+        padding 10px
+        input:not([type="checkbox"])
+            height 25px 
+            width 60%
+            border 1px solid #333
+    .check-agree
+        font-size $font-size-small
+    .reg-btn
+        display block
+        margin 0 auto
 </style>
 
 
