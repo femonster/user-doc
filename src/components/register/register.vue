@@ -16,7 +16,7 @@
             </div>
             <div class="input-group">
                 <label for="Identity">类别：</label>
-                <select name="Identity" id="Identity">
+                <select name="Identity" id="Identity" v-model="identity">
                     <option value="0">--请选择--</option>
                     <option value="1">医师</option>
                     <option value="2">护士</option>
@@ -63,15 +63,38 @@
             </div>
         </div>
         <!-- <router-link :to="" class="reg-btn u-btn" tag="button">提交</router-link> -->
-        <button class="reg-btn u-btn">提交</button>
+        <button class="reg-btn u-btn" @click="toNext">提交</button>
     </div>
 </template>
 <script>
 import MHeader from 'components/m-header/m-header'
-
+import{setItem,getItem} from 'common/js/utils'
 export default {
+    data(){
+        return {
+            identity:"0"
+        }
+    },
+    create(){
+        if(getItem("identity")){
+            console.log("已经注册")
+        }
+    },
     components: {
         MHeader
+    },
+    methods:{
+        toNext(){
+            setItem("identity",this.identity)
+            if(this.identity==1){
+                this.$router.push("/doconfig")
+            }else if(this.identity==2){
+                this.$router.push('/nuconfig')
+            }else{
+                alert("error")
+            }
+            
+        }
     }
 }
 </script>
