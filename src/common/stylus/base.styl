@@ -14,3 +14,49 @@ body,html
     color: $color-text-w
     outline: none 
     border: none
+
+.main-box
+    width: 100%
+    max-width:  768px
+    box-sizing: border-box
+    padding: 10px
+    position relative
+    margin: 0 auto
+    input:not([type="checkbox"]):not([type="radio"]),
+    select
+        width: 100%
+        height 30px
+        border 1px solid #999999
+        text-indent: 0.5em
+    .border
+        border: 1px solid #eeeeee
+        margin: 5px auto
+        overflow hidden
+.align-group
+    width: 100%
+    font-size: 0
+    margin: 10px 0
+    .a-l,.a-r,.a-align,.a-normal
+        height 100%
+        font-size: $font-size-medium-x
+        line-height: 2em
+        display inline-block
+        vertical-align: top
+    .a-l
+        width: 30%
+    .a-r
+        width: 70%
+    .a-align
+        text-align: center
+        width: 100%
+    .a-normal
+        width: 100%
+
+@media screen and (max-width:375px)
+    .align-group
+        .a-l,.a-r,.a-align,.a-normal
+            font-size: $font-size-medium
+
+    
+
+
