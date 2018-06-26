@@ -3,47 +3,20 @@
     <div class="top-box">
         <p-header></p-header>
         <div class="now-list">
-            <cube-index-list
-            :data="listData"
-            @select="selectItem"></cube-index-list>
+            <listview :ldata="listData"></listview>
         </div>
     </div>
 </template>
 <script>
 import PHeader from 'components/m-header/p-header'
+import Listview from 'base/listview/listview'
+import {mock_list} from 'mock/nowlist'
 
-const listData = [
-  {
-    "name": "★Hot City",
-    "items": [
-      {
-        "name": "BEIJING",
-        "value": 1
-      },
-      {
-        "name": "SHANGHAI",
-        "value": 2
-      }
-    ]
-  },
-  {
-    "name": "A",
-    "items": [
-      {
-        "name": "ANSHAN",
-        "value": 3
-      },
-      {
-        "name": "ANQING",
-        "value": 4
-      }
-    ]
-  }
-]
+
 export default {
     data(){
         return {
-            listData:listData
+            listData:mock_list
         } 
     },
     methods:{
@@ -52,7 +25,8 @@ export default {
         },
     },
     components:{
-        PHeader
+        PHeader,
+        Listview
     }
 }
 </script>
