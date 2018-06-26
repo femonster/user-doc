@@ -1,6 +1,6 @@
 <template>
-    <div class="m-header" v-show="show">
-        <span class="go-back" @click="reback"> < </span>
+    <div class="m-header">
+        <span class="go-back" @click="reback"  v-show="show"> < </span>
         {{title}}
     </div>
 </template>

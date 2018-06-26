@@ -1,6 +1,6 @@
 <template>
     <div class="register-div">
-        <m-header title="医护资格审核"></m-header>
+        <m-header title="医护资格审核" :show='ishow'></m-header>
         <div class="reg-form main-box">
             <cube-form
             :model="model">
@@ -17,7 +17,7 @@
                     <cube-form-item :field="fields[9]"></cube-form-item>
                     <cube-form-item :field="fields[10]">
                         <div class="pwd-div">
-                            <cube-input v-model="model.pwd" placeholder="验证码"></cube-input>
+                            <cube-input placeholder="验证码"></cube-input>
                             <cube-button :inline="true">发送验证码</cube-button>
                         </div>
                     </cube-form-item>
@@ -28,116 +28,8 @@
                     </cube-form-item>
             </cube-form-group>
             </cube-form>
-            <!-- <div class="align-group">
-                <div class="a-l">
-                    <label for="avatar">头像：</label>
-                </div>
-                <div class="a-r">
-                    <input type="file" name="avatar" id="avatar" />
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="username">真实姓名：</label>
-                </div>
-                <div class="a-r">
-                    <input type="text" name="username" id="username" />
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="hospital">所属医院：</label>
-                </div>
-                <div class="a-r">
-                    <input type="text" name="hospital" id="hospital" />
-                </div>   
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="Identity">类别：</label>
-                </div>
-                <div class="a-r">
-                    <select name="Identity" id="Identity" v-model="identity">
-                        <option value="0">--请选择--</option>
-                        <option value="1">医师</option>
-                        <option value="2">护士</option>
-                    </select>
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="department">任职科室：</label>
-                </div>
-                <div class="a-r">
-                    <select name="department" id="department">
-                        <option value="0">--请选择--</option>
-                        <option value="1">骨科</option>
-                        <option value="2">脑科</option>
-                    </select>
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="office">职称：</label>
-                </div>
-                <div class="a-r">
-                    <select name="office" id="office">
-                        <option value="0">--请选择--</option>
-                        <option value="1">普通医师</option>
-                        <option value="2">主任医师</option>
-                    </select>
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="idcard">证件照：</label>
-                </div>
-                <div class="a-r">
-                    <input type="file" name="idcard" id="idcard" />
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="zgcard">资格证：</label>
-                </div>
-                <div class="a-r">
-                    <input type="file" name="zgcard" id="zgcard" />
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="zccard">职称证：</label>
-                </div>
-                <div class="a-r">
-                    <input type="file" name="zccard" id="zccard" />
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-normal phone-box">
-                    <input type="tel" name="usertel" id="usertel" placeholder="手机号"/>
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l pwd-box" style="width:65%">
-                    <input type="text" name="renum" id="renum" placeholder="验证码"/>
-                </div>
-                <div class="a-r" style="width:35%;text-align:right">
-                    <button class="u-btn">发送验证码</button>
-                </div>
-                
-                
-            </div>
-            <div class="align-group">
-                <div class="a-normal guize">
-                    <input type="checkbox" name="agree" id="agree">
-                    本人确认所填资料真实有效 <span style="color:red;">审核最长不超过24小时</span>
-                </div>
-               
-            </div> -->
         </div>
-        <!-- <router-link :to="" class="reg-btn u-btn" tag="button">提交</router-link> -->
         <cube-button @click="toNext">提交</cube-button>
-        <!-- <button class="reg-btn u-btn" @click="toNext">提交</button> -->
     </div>
 </template>
 <script>
@@ -147,6 +39,7 @@ export default {
     data(){
         return {
             identity:"0",
+            ishow:false,
             model:{
                 avatar:[],
                 username:"",
