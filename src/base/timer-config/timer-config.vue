@@ -4,16 +4,16 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>周一</th>
-                    <th>周二</th>
-                    <th>周三</th>
-                    <th>周四</th>
-                    <th>周五</th>
-                    <th>周六</th>
-                    <th>周日</th>
+                    <th>一</th>
+                    <th>二</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th>六</th>
+                    <th>日</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="tableType!=3">
                 <tr v-for="(items,index) in tableData">
                     <td>{{index==0?"上午":(index==1?"下午":"夜间")}}</td>
                     <td v-for="(item,i) in items" @click.prevent="clickCell(index,item,i)">
@@ -21,10 +21,21 @@
                     </td>
                 </tr>
             </tbody>
+            <tbody v-if="tableType==3">
+                <tr v-for="(items,index) in tableData">
+                    <td>{{index==0?"上午":(index==1?"下午":"夜间")}}</td>
+                    <td v-for="(item,i) in items">
+                        {{item==0?"":(item==1?`出诊-${dataTimes[index][i]}`:`上门-${dataTimes[index][i]}`)}}
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </template>
 <script>
+// tableType 1 医生配置 2 护士配置 3 简报配置
+// tableData 一层 [上午,下午,夜间] 二层 [周一~周日] 0 未填 1 出诊 2 上门
+// dataTimes 出诊次数
 export default {
     props:{
         tableType:{
@@ -35,6 +46,12 @@ export default {
             type:Array,
             default:function(){
                 return [[0,1,0,0,0,0,0],[0,2,0,0,0,0,0],[0,0,0,0,0,0,0]]
+            }
+        },
+        dataTimes:{
+            type:Array,
+            default:function(){
+                return []
             }
         }
     },

@@ -1,0 +1,68 @@
+<template>
+    <!--卡片组件 -->
+    <div class="todo-card">
+        <template v-if="cardType==1">
+            <div class="todo-l">
+                <p>时间：{{item.time}}</p>
+                <p>姓名：{{item.uname}}</p>
+                <p>状态：{{item.status==0?"未开始":(item.status==1?"正在候诊":(item.status==2?"正在诊断":"已完成"))}}</p>
+                <cube-button :inline="true">问诊</cube-button>
+            </div>
+            <div class="todo-r">
+                <div class="todo-bg" :style="`background-image:url(${item.avatar})`"></div>
+            </div>
+            <div class="todo-status">{{item.method==1?"门诊":"上门"}}</div>
+        </template>
+    </div>
+</template>
+<script>
+// cardType 1 医生首页列表 2 护士首页列表 3 公告列表 4 病历列表 5 收益列表 6 咨询列表 7 退费列表
+export default {
+    props:{
+        cardType:{
+            type:[String, Number],
+            default:1
+        },
+        cardData:{
+            type:Object,
+            default:function(){
+                return {}
+            }
+        }
+    },
+}
+</script>
+<style lang="stylus" scoped>
+.todo-card
+    width calc(100% - 100px)
+    box-sizing border-box
+    border 1px solid #333333
+    position relative
+    display flex
+    padding 10px 15px
+    justify-content space-around
+    .todo-l
+        font-size 14px
+        line-height 1.5
+    .todo-r
+        .todo-bg 
+            width 90px
+            height 90px
+            background-position center
+            background-size cover
+            background-repeat no-repeat
+    .todo-status
+        width 30px
+        height 30px
+        font-size: 12px
+        border-radius 50%
+        line-height 30px
+        position absolute
+        top 45px
+        left -15px
+        text-align center
+        background-color green 
+        color #ffffff
+</style>
+
+

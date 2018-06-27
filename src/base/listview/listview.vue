@@ -9,11 +9,26 @@
         <ul>
             <li v-for="(group,index) in ldata" class="list-group" ref="listGroup" :key="index">
                 <h2 class="list-group-title">{{group.dname}}</h2>
-                <ul>
+                <ul v-if="index<(ldata.length-1)">
                     <li @click="selectItem(item)" v-for="(item,index) in group.items" class="list-group-item" :key="index">
-                        {{item.uname}}-{{item.status}}
+                        <div class="todo-card">
+                            <div class="todo-l">
+                                <p>时间：{{item.time}}</p>
+                                <p>姓名：{{item.uname}}</p>
+                                <p>状态：{{item.status==0?"未开始":(item.status==1?"正在候诊":(item.status==2?"正在诊断":"已完成"))}}</p>
+                                <cube-button :inline="true">问诊</cube-button>
+                            </div>
+                            <div class="todo-r">
+                                <div class="todo-bg" :style="`background-image:url(${item.avatar})`"></div>
+                            </div>
+                            <div class="todo-status">{{item.method==1?"门诊":"上门"}}</div>
+                        </div>
+                        
                     </li>
                 </ul>
+                <div class='jb-card' v-if="index===(ldata.length-1)">
+                    <timer-config :tableType="tableType" :tableData="group.mz" :dataTimes="group.times"></timer-config>
+                </div>
             </li>
         </ul>
         <div class="list-shortcut">
@@ -39,8 +54,9 @@
 <script>
 import Scroll from 'base/scroll/scroll'
 import Loading from 'base/loading/loading'
+import TimerConfig from 'base/timer-config/timer-config'
 // 导航字母的高度
-const ANCHOR_HEIGHT = 18
+const ANCHOR_HEIGHT = 30
 
 // 字母标题的高度
 const TITLE_HEIGHT = 30
@@ -55,6 +71,7 @@ export default {
     },
     data(){
         return {
+            tableType:3,
             // 当前区域
             currentIndex:0,
             // 滚动的Y值
@@ -68,6 +85,7 @@ export default {
         this.listenScroll = true
         this.touch = {}
         this.listHeight = []
+        
     },
     computed:{
         shortcutList(){
@@ -80,7 +98,7 @@ export default {
             if(this.scrollY>0){
                 return ''
             }
-            return this.ldata[this.currentIndex]?this.ldata[this.currentIndex].title:''
+            return this.ldata[this.currentIndex]?this.ldata[this.currentIndex].dname:''
         }
     },
     methods:{
@@ -108,15 +126,18 @@ export default {
         // 每个listGroup的高度（其实不是高度，应该叫to top height 合适点） 
           this.listHeight=[]
           const list = this.$refs.listGroup
+          console.log(list)
           let height = 0
           this.listHeight.push(height)
           for(let i = 0;i<list.length;i++){
               let item = list[i]
+              console.log(item,item.clientHeight)
               height += item.clientHeight
               this.listHeight.push(height)
           }
       },
         _scrollTo(index){
+            console.log(index,this.listHeight.length)
             // 不存在判断
             if(!index && index !== 0){
                 return
@@ -125,7 +146,7 @@ export default {
             if(index<0){
                 index = 0
             }else if(index>this.listHeight.length -1){
-                index = this.listHeight.length - 1
+                index = this.listHeight.length - 2
             }
 
             this.scrollY = -this.listHeight[index]
@@ -135,7 +156,7 @@ export default {
     watch:{
         ldata(){
             setTimeout(()=>{
-                this._calculateHeight()
+            this._calculateHeight()
             },20)
         },
         scrollY(newY){
@@ -176,7 +197,8 @@ export default {
     },
     components:{
         Scroll,
-        Loading
+        Loading,
+        TimerConfig
     }
 }
 </script>
@@ -193,6 +215,8 @@ export default {
     .list-group
         padding-bottom 30px
         .list-group-title
+            display block
+            width calc(100% - 100px)
             height 30px
             line-height 30px
             padding-left 20px
@@ -202,7 +226,8 @@ export default {
         .list-group-item
             display flex
             align-items center
-            padding 20px 0 0 30px
+            padding-top 20px
+            padding-left 20px
             .avatar
                 width: 50px
                 height: 50px
@@ -211,31 +236,63 @@ export default {
                 margin-left: 20px
                 color: $color-text-l
                 font-size: $font-size-medium
+        .todo-card
+            width calc(100% - 100px)
+            box-sizing border-box
+            border 1px solid #333333
+            position relative
+            display flex
+            padding 10px 15px
+            justify-content space-around
+            .todo-l
+                font-size 14px
+                line-height 1.5
+            .todo-r
+                .todo-bg 
+                    width 90px
+                    height 90px
+                    background-position center
+                    background-size cover
+                    background-repeat no-repeat
+            .todo-status
+                width 30px
+                height 30px
+                font-size: 12px
+                border-radius 50%
+                line-height 30px
+                position absolute
+                top 45px
+                left -15px
+                text-align center
+                background-color green 
+                color #ffffff
+        .jb-card
+            width calc(100% - 55px)
     .list-shortcut
         position absolute
         z-index 30
         right 0
-        top 50%
-        transform translateY(-50%)
-        width 20px
+        top 5%
+        width 50px
         padding 20px 0
-        border-radius 10px
+        border-left 5px solid $color-background-d
         text-align center
-        background $color-background-d
+        background #ffffff
         font-family Helvetica
         .item
             padding 3px
-            line-height 1
-            color $color-text-l
+            line-height 2
+            color $color-text-d
             font-size $font-size-small
             &.current
-                color: $color-theme
+                color: red
     .list-fixed
         position absolute
         top 0
         left 0
         width 100%
         .fixed-title
+            width calc(100% - 100px)
             height 30px
             line-height 30px
             padding-left 20px

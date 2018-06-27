@@ -4,6 +4,8 @@ import Register from 'components/register/register'
 import Doconfig from 'components/doctor/doconfig'
 import Doctor from 'components/doctor/doctor'
 import Nuconfig from 'components/nurse/nuconfig'
+import Personal from 'components/personal/personal'
+import Notice from 'components/notice/notice-list'
 Vue.use(Router)
 
 export default new Router({
@@ -23,5 +25,13 @@ export default new Router({
         path: '/doctor',
         name: 'doctor',
         component: Doctor
+    }, {
+        path: '/personal',
+        name: 'personal',
+        component: Personal
+    }, {
+        path: '/notice',
+        name: 'notice',
+        component: Notice
     }]
 })

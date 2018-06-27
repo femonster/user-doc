@@ -229,7 +229,7 @@
             <div class="align-group">
                 <div class="a-align">
                     <cube-button class="sec-btn" :outline="true" :inline="true" @click="toPrev">返回上一步</cube-button>
-                    <cube-button class="sec-btn" :inline="true" @click="toNext">确认配置</cube-button>
+                    <cube-button class="sec-btn" :inline="true" @click="$router.push('/doctor')">确认配置</cube-button>
                 </div>
             </div>
         </div>
