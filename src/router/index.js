@@ -6,6 +6,10 @@ import Doctor from 'components/doctor/doctor'
 import Nuconfig from 'components/nurse/nuconfig'
 import Personal from 'components/personal/personal'
 import Notice from 'components/notice/notice-list'
+import AddNotice from 'components/notice/add-notice'
+import Refund from 'components/personal/refund'
+import Patient from 'components/history/Patient'
+import HistoryList from 'components/history/history-list'
 Vue.use(Router)
 
 export default new Router({
@@ -33,5 +37,21 @@ export default new Router({
         path: '/notice',
         name: 'notice',
         component: Notice
+    }, {
+        path: '/add_notice',
+        name: 'add_notice',
+        component: AddNotice
+    }, {
+        path: '/refund',
+        name: 'refund',
+        component: Refund
+    }, {
+        path: '/patient',
+        name: 'patient',
+        component: Patient,
+        children: [{
+            path: 'list/:id',
+            component: HistoryList
+        }, ]
     }]
 })

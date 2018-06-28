@@ -1,10 +1,9 @@
 <template>
         <!--公告列表  -->
     <div class="notice-box">
-        <m-header title="我的公告"></m-header>
+        <m-header title="退费信息"></m-header>
         <div class="n-list">
              <listview :ldata="listData" cardType="3" @select="select"></listview>
-             <cube-button :inline="true" class="add-nbtn" @click="addNotice">发布公告</cube-button>
         </div>
     </div>
     
@@ -12,7 +11,7 @@
 <script>
 import MHeader from 'components/m-header/m-header'
 import Listview from 'base/listview/listview'
-import {mock_notice} from 'mock/mock_notice'
+import {mock_refund} from 'mock/mock_refund'
 export default {
     data(){
         return {
@@ -21,7 +20,7 @@ export default {
     },
     created(){
         setTimeout(()=>{
-            this.listData = mock_notice
+            this.listData = mock_refund
         },20)
     },
     methods:{

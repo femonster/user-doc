@@ -3,15 +3,39 @@
     <div class="todo-card">
         <template v-if="cardType==1">
             <div class="todo-l">
-                <p>时间：{{item.time}}</p>
-                <p>姓名：{{item.uname}}</p>
-                <p>状态：{{item.status==0?"未开始":(item.status==1?"正在候诊":(item.status==2?"正在诊断":"已完成"))}}</p>
+                <p>时间：{{cardData.time}}</p>
+                <p>姓名：{{cardData.uname}}</p>
+                <p>状态：{{cardData.status==0?"未开始":(cardData.status==1?"正在候诊":(cardData.status==2?"正在诊断":"已完成"))}}</p>
                 <cube-button :inline="true">问诊</cube-button>
             </div>
             <div class="todo-r">
-                <div class="todo-bg" :style="`background-image:url(${item.avatar})`"></div>
+                <div class="todo-bg" :style="`background-image:url(${cardData.avatar})`"></div>
             </div>
-            <div class="todo-status">{{item.method==1?"门诊":"上门"}}</div>
+            <div class="todo-status">{{cardData.method==1?"门诊":"上门"}}</div>
+        </template>
+        <template v-else-if="cardType==2">
+
+        </template>
+        <template v-else-if="cardType==3">
+            <div class="todo-l">
+                <p>{{cardData.time}}</p>
+                <p>{{cardData.notice}}</p>
+            </div>
+            <div class="todo-r">
+                <div class="todo-bg" :style="`background-image:url(${cardData.avatar})`"></div>
+            </div>
+        </template>
+        <template v-else-if="cardType==4">
+
+        </template>
+        <template v-else-if="cardType==5">
+
+        </template>
+        <template v-else-if="cardType==6">
+
+        </template>
+        <template v-else-if="cardType==7">
+
         </template>
     </div>
 </template>

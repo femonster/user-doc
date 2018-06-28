@@ -3,13 +3,13 @@
     <div class="top-box">
         <p-header></p-header>
         <div class="now-list">
-            <listview :ldata="listData"></listview>
+            <listview :ldata="listData" cardType="1" @select="select"></listview>
         </div>
         <div class="footer">
-            <cube-button :inline="true">家庭患者管理</cube-button>
+            <cube-button :inline="true" @click="toPatient">家庭患者管理</cube-button>
             <cube-button :inline="true">图文咨询</cube-button>
-            <cube-button :inline="true">退费信息</cube-button>
-            <cube-button :inline="true">公告发布</cube-button>
+            <cube-button :inline="true" @click="toRefund">退费信息</cube-button>
+            <cube-button :inline="true" @click="toNotice">公告发布</cube-button>
         </div>
     </div>
 </template>
@@ -31,9 +31,18 @@ export default {
         },20)
     },
     methods:{
-        selectItem(item) {
-            console.log(item.name)
+        select(item) {
+            console.log(item)
         },
+        toNotice(){
+            this.$router.push("/notice")
+        },
+        toRefund(){
+            this.$router.push("/refund")
+        },
+        toPatient(){
+            this.$router.push("/patient")
+        }
     },
     components:{
         PHeader,
