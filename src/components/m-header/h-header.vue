@@ -21,13 +21,24 @@
 <script>
 export default {
     props:{
-        ishow:[Number,String],
-        default:0
+        ishow:Boolean,
+        default:false
     }
 }
 </script>
 <style lang="stylus" scoped>
-
+    .h-header
+        width 100%
+        box-sizing border-box
+        padding 10px
+        background-color #eeeeee
+        display flex
+        justify-content space-around
+        height 180px
+        p
+            line-height 1.5
+        img 
+            width 100px
 </style>
 
 

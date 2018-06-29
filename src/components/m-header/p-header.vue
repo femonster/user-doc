@@ -5,14 +5,26 @@
             <p>张耕恺 医生，您好！</p>
             <p>2018-06-26</p>
         </div>
-        <div class="p-btns">
-            <cube-button @click="toPerson">个人中心</cube-button>
-            <cube-button @click="nextWeek">下周安排</cube-button>
+        <div class="p-btns" v-if="syshow">
+            <cube-button @click="toPerson" v-if="syshow">个人中心</cube-button>
+            <cube-button @click="nextWeek" v-if="syshow">下周安排</cube-button>
+            <cube-button @click="nextWeek" v-if="zxshow">图文咨询</cube-button>
         </div>
+        
     </div>
 </template>
 <script>
 export default {
+    props:{
+        syshow:{
+            type:Boolean,
+            default:true
+        },
+        zxshow:{
+            type:Boolean,
+            default:false
+        }
+    },
     methods:{
         toPerson(){
             this.$router.push('/personal')

@@ -10,6 +10,8 @@ import AddNotice from 'components/notice/add-notice'
 import Refund from 'components/personal/refund'
 import Patient from 'components/history/Patient'
 import HistoryList from 'components/history/history-list'
+import History from 'components/history/history'
+import Start from 'components/now/start'
 Vue.use(Router)
 
 export default new Router({
@@ -48,10 +50,18 @@ export default new Router({
     }, {
         path: '/patient',
         name: 'patient',
-        component: Patient,
-        children: [{
-            path: 'list/:id',
-            component: HistoryList
-        }, ]
-    }]
+        component: Patient
+    },{
+        path: '/list/:id',
+        name:'historyList',
+        component: HistoryList
+    },{
+        path: '/history',
+        name:'start',
+        component: History
+    },{
+        path: '/start',
+        name:'start',
+        component: Start
+    }, ]
 })

@@ -5,7 +5,6 @@
             <list-viewp :ldata="patient" @select="select"></list-viewp>
         </div>
   </div>
-  
 </template>
 
 <script>
@@ -26,7 +25,7 @@ export default {
   },
   methods:{
       select(item){
-          console.log(item)
+          this.$router.push("/list/"+item.id)
       }
   },
   components:{

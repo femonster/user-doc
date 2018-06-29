@@ -3,7 +3,7 @@
     <div class="notice-box">
         <m-header title="退费信息"></m-header>
         <div class="n-list">
-             <listview :ldata="listData" cardType="3" @select="select"></listview>
+            <listview :ldata="listData" cardType="3" @select="select"></listview>
         </div>
     </div>
     

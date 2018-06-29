@@ -26,7 +26,14 @@
             </div>
         </template>
         <template v-else-if="cardType==4">
-
+            <div class="todo-l">
+                <p>{{cardData.time}}</p>
+                <p>{{cardData.history}}</p>
+                <p>病历号：{{cardData.hid}}</p>
+            </div>
+            <div class="todo-r">
+                <div class="todo-bg" :style="`background-image:url(${cardData.avatar})`"></div>
+            </div>
         </template>
         <template v-else-if="cardType==5">
 
