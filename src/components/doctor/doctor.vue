@@ -4,10 +4,11 @@
         <p-header></p-header>
         <div class="now-list">
             <listview :ldata="listData" cardType="1" @select="select"></listview>
+            <cube-button :inline="true" @click="toPatient" class="pthuanze">普通患者管理</cube-button>
         </div>
         <div class="footer">
             <cube-button :inline="true" @click="toPatient">家庭患者管理</cube-button>
-            <cube-button :inline="true">图文咨询</cube-button>
+            <cube-button :inline="true" @click="totwzx">图文咨询</cube-button>
             <cube-button :inline="true" @click="toRefund">退费信息</cube-button>
             <cube-button :inline="true" @click="toNotice">公告发布</cube-button>
         </div>
@@ -42,6 +43,9 @@ export default {
         },
         toPatient(){
             this.$router.push("/patient")
+        },
+        totwzx(){
+            this.$router.push('/consult')
         }
     },
     components:{
@@ -58,6 +62,10 @@ export default {
         position fixed
         top 110px
         bottom 50px
+        .pthuanze
+            position absolute
+            right 0
+            top 70%
     .footer
         width 100%
         height 50px

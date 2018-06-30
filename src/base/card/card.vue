@@ -6,7 +6,7 @@
                 <p>时间：{{cardData.time}}</p>
                 <p>姓名：{{cardData.uname}}</p>
                 <p>状态：{{cardData.status==0?"未开始":(cardData.status==1?"正在候诊":(cardData.status==2?"正在诊断":"已完成"))}}</p>
-                <cube-button :inline="true">问诊</cube-button>
+                <cube-button :inline="true" @click="wenzhen">问诊</cube-button>
             </div>
             <div class="todo-r">
                 <div class="todo-bg" :style="`background-image:url(${cardData.avatar})`"></div>
@@ -39,7 +39,13 @@
 
         </template>
         <template v-else-if="cardType==6">
-
+             <div class="todo-l">
+                 <p>姓名：{{cardData.iname}}</p>
+                <p>咨询时间：{{cardData.time}}</p>
+            </div>
+            <div class="todo-r">
+                <div class="todo-bg" :style="`background-image:url(${cardData.avatar})`"></div>
+            </div>
         </template>
         <template v-else-if="cardType==7">
 
@@ -61,6 +67,11 @@ export default {
             }
         }
     },
+    methods:{
+            wenzhen(){
+                this.$router.push("/start")
+            }
+        }
 }
 </script>
 <style lang="stylus" scoped>

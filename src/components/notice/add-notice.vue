@@ -8,7 +8,7 @@
                 :schema="schema"
                 :options="options"
                 ></cube-form>
-                <cube-button class="add-btn">发布</cube-button>
+                <cube-button class="add-btn" @click="addNotice">发布</cube-button>
             </div>
         </div>
 </template>
@@ -42,6 +42,11 @@ export default {
                 scrollToInvalidField: true,
                 layout: 'standard' // classic fresh
             }
+        }
+    },
+    methods:{
+        addNotice(){
+            this.$router.go(-1)
         }
     },
     components:{

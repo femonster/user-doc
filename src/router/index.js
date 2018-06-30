@@ -12,6 +12,10 @@ import Patient from 'components/history/Patient'
 import HistoryList from 'components/history/history-list'
 import History from 'components/history/history'
 import Start from 'components/now/start'
+import Write from 'components/now/write'
+import Consult from 'components/consult/consult'
+import ConsultList from 'components/consult/consult_list'
+import ConsultDetail from 'components/consult/consult_detail'
 Vue.use(Router)
 
 export default new Router({
@@ -63,5 +67,21 @@ export default new Router({
         path: '/start',
         name:'start',
         component: Start
+    },{
+        path: '/write',
+        name:'write',
+        component: Write
+    },{
+        path: '/consult',
+        name:'consult',
+        component: Consult
+    },{
+        path: '/conlist',
+        name:'conlist',
+        component: ConsultList
+    },{
+        path: '/condetail',
+        name:'condetail',
+        component: ConsultDetail
     }, ]
 })

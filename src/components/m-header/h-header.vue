@@ -34,7 +34,7 @@ export default {
         background-color #eeeeee
         display flex
         justify-content space-around
-        height 180px
+        min-height 180px
         p
             line-height 1.5
         img 
