@@ -41,7 +41,7 @@ module.exports = {
             'components': resolve('src/components'),
             'api': resolve('src/api'),
             'base': resolve('src/base'),
-            'mock':resolve('src/mock')
+            'mock': resolve('src/mock')
         }
     },
     plugins: [

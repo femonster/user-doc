@@ -14,7 +14,15 @@
             <div class="todo-status">{{cardData.method==1?"门诊":"上门"}}</div>
         </template>
         <template v-else-if="cardType==2">
-
+            <div class="todo-l">
+                <p>时间：{{cardData.time}}</p>
+                <p>姓名：{{cardData.uname}}</p>
+                <p>状态：{{cardData.status==0?"未开始":(cardData.status==1?"正在护理":"已完成")}}</p>
+                <cube-button :inline="true" @click="wenzhen">护理</cube-button>
+            </div>
+            <div class="todo-r">
+                <div class="todo-bg" :style="`background-image:url(${cardData.avatar})`"></div>
+            </div>
         </template>
         <template v-else-if="cardType==3">
             <div class="todo-l">

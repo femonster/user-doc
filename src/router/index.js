@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import Register from 'components/register/register'
 import Doconfig from 'components/doctor/doconfig'
 import Doctor from 'components/doctor/doctor'
+
+import Nurse from 'components/nurse/nurse'
+
 import Nuconfig from 'components/nurse/nuconfig'
 import Personal from 'components/personal/personal'
 import Notice from 'components/notice/notice-list'
@@ -55,33 +58,37 @@ export default new Router({
         path: '/patient',
         name: 'patient',
         component: Patient
-    },{
+    }, {
         path: '/list/:id',
-        name:'historyList',
+        name: 'historyList',
         component: HistoryList
-    },{
+    }, {
         path: '/history',
-        name:'start',
+        name: 'start',
         component: History
-    },{
+    }, {
         path: '/start',
-        name:'start',
+        name: 'start',
         component: Start
-    },{
+    }, {
         path: '/write',
-        name:'write',
+        name: 'write',
         component: Write
-    },{
+    }, {
         path: '/consult',
-        name:'consult',
+        name: 'consult',
         component: Consult
-    },{
+    }, {
         path: '/conlist',
-        name:'conlist',
+        name: 'conlist',
         component: ConsultList
-    },{
+    }, {
         path: '/condetail',
-        name:'condetail',
+        name: 'condetail',
         component: ConsultDetail
+    }, {
+        path: '/nurse',
+        name: 'nurse',
+        component: Nurse
     }, ]
 })

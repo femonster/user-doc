@@ -2,7 +2,7 @@
     <div class="p-header">
         <div class="img-box"></div>
         <div class="p-desc">
-            <p>张耕恺 医生，您好！</p>
+            <p>张耕恺 {{title}}，您好！</p>
             <p>2018-06-26</p>
         </div>
         <div class="p-btns">
@@ -16,6 +16,10 @@
 <script>
 export default {
     props:{
+        title:{
+            type:String,
+            default:"医生"
+        },
         syshow:{
             type:Boolean,
             default:true

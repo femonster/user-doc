@@ -36,7 +36,7 @@
                          <cube-checkbox v-model="model.family.freeReserve.check" id="freeReserve">
                             <label for="freeReserve">免费预约挂号</label>
                         </cube-checkbox>
-                        <cube-input type="number" v-model="model.family.freeReserve.times">
+                        <cube-input type="text" v-model="model.family.freeReserve.times"   :disabled="true">
                             <span slot="append" style="padding-left:10px;">次</span>
                         </cube-input>
                     </cube-form-item>
@@ -255,7 +255,7 @@ export default {
                     price:200,
                     freeReserve:{
                         check:true,
-                        times:30
+                        times:"无限"
                     },
                     freeTohome:{
                         check:true,
