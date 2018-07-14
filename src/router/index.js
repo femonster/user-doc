@@ -1,24 +1,35 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Register from 'components/register/register'
+
 import Doconfig from 'components/doctor/doconfig'
 import Doctor from 'components/doctor/doctor'
 
 import Nurse from 'components/nurse/nurse'
-
 import Nuconfig from 'components/nurse/nuconfig'
+
 import Personal from 'components/personal/personal'
+import Refund from 'components/personal/refund'
+import Detail from 'components/personal/person_detail'
+import Address from 'components/personal/address'
+import Mdetail from 'components/personal/money_detail'
+
 import Notice from 'components/notice/notice-list'
 import AddNotice from 'components/notice/add-notice'
-import Refund from 'components/personal/refund'
+
+
 import Patient from 'components/history/Patient'
 import HistoryList from 'components/history/history-list'
 import History from 'components/history/history'
+
 import Start from 'components/now/start'
 import Write from 'components/now/write'
+
 import Consult from 'components/consult/consult'
 import ConsultList from 'components/consult/consult_list'
 import ConsultDetail from 'components/consult/consult_detail'
+
+import Report from 'components/report/report'
 Vue.use(Router)
 
 export default new Router({
@@ -64,7 +75,7 @@ export default new Router({
         component: HistoryList
     }, {
         path: '/history',
-        name: 'start',
+        name: 'history',
         component: History
     }, {
         path: '/start',
@@ -90,5 +101,21 @@ export default new Router({
         path: '/nurse',
         name: 'nurse',
         component: Nurse
-    }, ]
+    }, {
+        path: '/pdetail',
+        name: 'pdetail',
+        component: Detail
+    },{
+        path: '/address',
+        name: 'address',
+        component: Address
+    },{
+        path: '/mdetail',
+        name: 'mdetail',
+        component: Mdetail
+    },{
+        path: '/report',
+        name: 'report',
+        component: Report
+    } ]
 })

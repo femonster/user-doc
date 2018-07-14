@@ -47,10 +47,10 @@
             </div>
         </div>
         <div class="personal-btns">
-            <cube-button>资料管理</cube-button>
-            <cube-button>收益明细</cube-button>
+            <router-link :to="`/pdetail`" tag="cube-button">资料管理</router-link>
+            <router-link :to="`/address`" tag="cube-button">地址管理</router-link>
+            <router-link :to="`/mdetail`" tag="cube-button">收益明细</router-link>
             <cube-button>意见反馈</cube-button>
-            <cube-button>地址管理</cube-button>
         </div>
     </div>
 </template>

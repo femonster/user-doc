@@ -4,6 +4,7 @@
         <p-header></p-header>
         <div class="now-list">
             <listview :ldata="listData" cardType="1" @select="select"></listview>
+            <cube-button :inline="true" class="closeyy">关闭预约</cube-button>
             <cube-button :inline="true" @click="toPatient" class="pthuanze">普通患者管理</cube-button>
         </div>
         <div class="footer">
@@ -66,6 +67,10 @@ export default {
             position absolute
             right 0
             top 70%
+        .closeyy
+            position absolute
+            right 0
+            top 62%
     .footer
         width 100%
         height 50px

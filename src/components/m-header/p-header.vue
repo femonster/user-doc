@@ -34,7 +34,12 @@ export default {
             this.$router.push('/personal')
         },
         nextWeek(){
-            this.$router.push('/doconfig')
+            if(this.title=="医生"){
+                this.$router.push('/doconfig?id=2')
+            }else{
+                this.$router.push('/nuconfig')
+            }
+            
         },
         twzx(){
             this.$router.push('/consult')

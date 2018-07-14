@@ -228,7 +228,7 @@
             </div>
             <div class="align-group">
                 <div class="a-align">
-                    <cube-button class="sec-btn" :outline="true" :inline="true" @click="toPrev">返回上一步</cube-button>
+                    <cube-button class="sec-btn" v-show="isprev" :outline="true" :inline="true" @click="toPrev">返回上一步</cube-button>
                     <cube-button class="sec-btn" :inline="true" @click="$router.push('/doctor')">确认配置</cube-button>
                 </div>
             </div>
@@ -244,6 +244,7 @@ export default {
         return {
             title:"诊疗费用配置",
             issec:false,
+            isprev:true,
             ctbitem:true,
             newAddress:'',
             address: ["北京第一人民医院","北京朝阳区将府家园"],
@@ -324,6 +325,11 @@ export default {
                 start:["18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00"],
                 end:["20:00","20:30","21:00","21:30","22:00","22:30","23:00","23:30"],
             }
+        }
+
+        if(this.$route.query.id==2){
+            this.issec = true;
+            this.isprev = false;
         }
         
     },

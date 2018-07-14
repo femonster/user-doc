@@ -10,18 +10,19 @@
                     <cube-form-item :field="fields[2]"></cube-form-item>
                     <cube-form-item :field="fields[3]"></cube-form-item>
                     <cube-form-item :field="fields[4]"></cube-form-item>
-                    <cube-form-item :field="fields[5]"></cube-form-item>
-                    <cube-form-item :field="fields[6]"></cube-form-item>
+                    <cube-form-item :field="fields[5]" v-show="model.identity==1"></cube-form-item>
+                    <cube-form-item :field="fields[6]" v-show="model.identity==2"></cube-form-item>
                     <cube-form-item :field="fields[7]"></cube-form-item>
                     <cube-form-item :field="fields[8]"></cube-form-item>
                     <cube-form-item :field="fields[9]"></cube-form-item>
-                    <cube-form-item :field="fields[10]">
+                    <cube-form-item :field="fields[10]"></cube-form-item>
+                    <cube-form-item :field="fields[11]">
                         <div class="pwd-div">
                             <cube-input placeholder="验证码"></cube-input>
                             <cube-button :inline="true">发送验证码</cube-button>
                         </div>
                     </cube-form-item>
-                    <cube-form-item :field="fields[11]">
+                    <cube-form-item :field="fields[12]">
                         <cube-checkbox v-model="model.agree">
                             <p style="font-size:13px;">本人确认所填资料真实有效 <span style="color:red;">审核最长不超过24小时</span></p>
                         </cube-checkbox>
@@ -46,7 +47,8 @@ export default {
                 hospital:"",
                 department:1,
                 identity:1,
-                office:1,
+                office1:1,
+                office2:3,
                 idcard:[],
                 zgcard:[],
                 zccard:[],
@@ -130,10 +132,21 @@ export default {
                     },
                     {
                         type: 'select',
-                        modelKey:'office',
+                        modelKey:'office1',
                         label:'入驻职称',
                          props: {
-                            options: [{value:1,text:"普通医师"},{value:2,text:"主治医师"},{value:3,text:"初级护士"},{value:3,text:"护士长"}]
+                            options: [{value:1,text:"普通医师"},{value:2,text:"主治医师"}]
+                        },
+                        rules: {
+                            required: true
+                        }
+                    },
+                    {
+                        type: 'select',
+                        modelKey:'office2',
+                        label:'入驻职称',
+                         props: {
+                            options: [{value:3,text:"初级护士"},{value:4,text:"护士长"}]
                         },
                         rules: {
                             required: true

@@ -20,7 +20,8 @@
                     </li>
                 </ul>
                 <div class='jb-card' v-if="cardType==1 && index===(ldata.length-1)">
-                    <timer-config :tableType="tableType" :tableData="group.mz" :dataTimes="group.times"></timer-config>
+                    <!-- <timer-config :tableType="tableType" :tableData="group.mz" :dataTimes="group.times"></timer-config> -->
+                    <router-link :to='`/report`' tag="button" style="margin:10px">查看本周简报</router-link>
                 </div>
             </li>
         </ul>

@@ -14,7 +14,7 @@
             <br>
             <div class="selected" v-if="selectedData.length>0">
                 <ul>
-                    <li v-for="(item,index) in selectedData">
+                    <li v-for="(item,index) in selectedData" :key="index">
                         <p>{{item}}  <input type="text" value="200"> 元/次</p>
                         <button @click="delItem(index)">删除</button>
                     </li>
@@ -96,7 +96,10 @@
             <div class="table-config">
                 <timer-config :tableType=tableType :tableData=model2.tableData @checktime="checktime"></timer-config>
             </div>
-            <cube-button class="nurse-btn">确定</cube-button>
+            <br><br>
+            <br>
+            <br>
+            <router-link :to="`/nurse`" tag="cube-button" class="nurse-btn">确定</router-link>
         </div>
     </div>
     
@@ -159,8 +162,12 @@ export default {
             this.$delete(this.selectedData,index)
         },
         checktime(){
-             let args = arguments[0];
-             console.log(args);
+            let args = arguments[0],
+            fstIndex = args[0],
+            secIndex = args[2],
+            val = args[1],
+            _this = this;
+            _this.model2.tableData[fstIndex].splice(secIndex,1,2);
         }
     },
     components: {
