@@ -24,121 +24,52 @@
                     </cube-form-item>
                 </cube-form-group>
                 <br>
-                <h3 class="fst-h">家庭医生配置：</h3>
-                <cube-form-group>
-                    <cube-form-item :field="fields[3]">
-                        <cube-input type="number" v-model="model.family.price">
-                            <span slot="append" style="padding-left:10px;">元/月</span>
-                        </cube-input>
-                    </cube-form-item>
+                <h3 class="fst-h"><cube-switch v-model="ishowfamily">家庭医生配置</cube-switch></h3>
 
-                    <cube-form-item>
-                         <cube-checkbox v-model="model.family.freeReserve.check" id="freeReserve">
-                            <label for="freeReserve">免费预约挂号</label>
-                        </cube-checkbox>
-                        <cube-input type="text" v-model="model.family.freeReserve.times"   :disabled="true">
-                            <span slot="append" style="padding-left:10px;">次</span>
-                        </cube-input>
-                    </cube-form-item>
-                    <cube-form-item>
-                         <cube-checkbox v-model="model.family.freeTohome.check" id="freeTohome">
-                            <label for="freeTohome">上门诊疗</label>
-                        </cube-checkbox>
-                        <cube-input type="number" v-model="model.family.freeTohome.times">
-                            <span slot="append" style="padding-left:10px;">次</span>
-                        </cube-input>
-                    </cube-form-item>
-                    <cube-form-item>
-                         <cube-checkbox v-model="model.family.freeConsult.check" id="freeConsult">
-                            <label for="freeConsult">免费图文咨询</label>
-                        </cube-checkbox>
-                        <cube-input type="number" v-model="model.family.freeConsult.times">
-                            <span slot="append" style="padding-left:10px;">次</span>
-                        </cube-input>
-                    </cube-form-item>
-                </cube-form-group>
-                    <!-- <cube-form-item :field="fields[1]"></cube-form-item>
-                    <cube-form-item :field="fields[2]"></cube-form-item>
-                    <cube-form-item :field="fields[3]"></cube-form-item>
-                    <cube-form-item :field="fields[4]"></cube-form-item>
-                    <cube-form-item :field="fields[5]"></cube-form-item>
-                    <cube-form-item :field="fields[6]"></cube-form-item>
-                    <cube-form-item :field="fields[7]"></cube-form-item>
-                    <cube-form-item :field="fields[8]"></cube-form-item>
-                    <cube-form-item :field="fields[9]"></cube-form-item>
-                    <cube-form-item :field="fields[10]">
-                        <div class="pwd-div">
-                            <cube-input v-model="model.pwd" placeholder="验证码"></cube-input>
-                            <cube-button :inline="true">发送验证码</cube-button>
-                        </div>
-                    </cube-form-item>
-                    <cube-form-item :field="fields[11]">
-                        <cube-checkbox v-model="model.agree">
-                            <p style="font-size:13px;">本人确认所填资料真实有效 <span style="color:red;">审核最长不超过24小时</span></p>
-                        </cube-checkbox>
-                    </cube-form-item> -->
+                <div class="family-box" v-show="ishowfamily">
+                    <cube-form-group>
+                        <cube-form-item :field="fields[3]">
+                            <cube-input type="number" v-model="model.family.price">
+                                <span slot="append" style="padding-left:10px;">元/月</span>
+                            </cube-input>
+                        </cube-form-item>
+
+                        <cube-form-item>
+                            <cube-checkbox v-model="model.family.freeReserve.check" id="freeReserve">
+                                <label for="freeReserve">免费预约挂号</label>
+                            </cube-checkbox>
+                            <cube-input type="text" v-model="model.family.freeReserve.times"   :disabled="true">
+                                <span slot="append" style="padding-left:10px;">次</span>
+                            </cube-input>
+                        </cube-form-item>
+                        <cube-form-item>
+                            <cube-checkbox v-model="model.family.freeTohome.check" id="freeTohome">
+                                <label for="freeTohome">上门诊疗</label>
+                            </cube-checkbox>
+                            <cube-input type="number" v-model="model.family.freeTohome.times">
+                                <span slot="append" style="padding-left:10px;">次</span>
+                            </cube-input>
+                        </cube-form-item>
+                        <cube-form-item>
+                            <cube-checkbox v-model="model.family.freeConsult.check" id="freeConsult">
+                                <label for="freeConsult">免费图文咨询</label>
+                            </cube-checkbox>
+                            <cube-input type="number" v-model="model.family.freeConsult.times">
+                                <span slot="append" style="padding-left:10px;">次</span>
+                            </cube-input>
+                        </cube-form-item>
+                    </cube-form-group>
+                </div>
+
+
                 <cube-form-group>
                     <cube-button class="fst-btn" @click="toNext">(预约挂号配置)下一步</cube-button>
                 </cube-form-group>
             </cube-form>
-            <!-- <div class="align-group">
-                <div class="a-l">
-                    <label for="reserve">预约挂号（次）：</label>
-                </div>
-                <div class="a-r">
-                    <cube-input type="text" name="reserve" id="reserve" ></cube-input>元
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="tohome">上门诊疗（次）：</label>
-                </div>
-                <div class="a-r">
-                    <input type="text" name="tohome" id="tohome" />元
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="consult">图文咨询（次）：</label>
-                </div>
-                <div class="a-r">
-                    <input type="text" name="consult" id="consult" />元
-                </div>
-            </div>
-            <div class="border"></div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label for="family">家庭医生：</label>
-                </div>
-                <div class="a-r">
-                    <input type="text" name="family" id="family" />元/月
-                </div>
-            </div>
-            <div class="align-group">
-                <div class="a-l">
-                    <label>包含服务</label>            
-                </div>
-                <div class="a-r sel-times">
-                    <input type="checkbox" name="mfgh" id="mfgh">
-                    <label for="mfgh">免费预约挂号：</label>
-                    <input type="text" name="ghtimes" id="ghtimes" value="30"/>次
-                    <br>
-                    <input type="checkbox" name="smzl" id="smzl">
-                    <label for="smzl">上门诊疗：</label>
-                    <input type="text" name="zltimes" id="zltimes" value="1"/>次
-                    <br>
-                    <input type="checkbox" name="twzx" id="twzx">
-                    <label for="twzx">免费图文咨询：</label>
-                    <input type="text" name="zxtimes" id="zxtimes" value="30"/>次
-                </div>
-                
-            </div>
-            <cube-button class="fst-btn" @click="toNext">(预约挂号配置)下一步</cube-button> -->
-            <!-- <button class="fst-btn u-btn" @click="toNext">(预约挂号配置)下一步</button> -->
         </div>
         <!-- 预约挂号配置 -->
         <div class="sec-cfg  main-box" v-show="issec">
-
+            <h3>默认时间/次数配置</h3>
             <div class="align-group">
                 <div class="a-l">
                     <label>上午诊疗:</label>
@@ -233,6 +164,38 @@
                 </div>
             </div>
         </div>
+        <!-- 具体配置时间 -->
+        <div class="special-config" v-show="isspecfg" ref="speccfgdiv">
+            <div class="mask"></div>
+            <div class="cfg">
+                <div class="cfg-title">
+                    <span class="t1">具体配置</span>
+                    <span class="t2" @click="hidespecial">跳过</span>
+                    <span class="t3" @click="speccfg">确认</span>
+                </div>
+                <div class="cfg-content">
+
+                    <div class="cfg-content-wrap">
+                        <select name="" id="">
+                            <option value="9:00">9:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                        </select>
+                        -
+                        <select name="" id="">
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+                        -
+                        <input type="text"/>
+                        次
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
 </template>
@@ -245,8 +208,10 @@ export default {
             title:"诊疗费用配置",
             issec:false,
             isprev:true,
+            isspecfg:false,
             ctbitem:true,
             newAddress:'',
+            ishowfamily:false,
             address: ["北京第一人民医院","北京朝阳区将府家园"],
             model:{
                 reserve:"",
@@ -375,11 +340,22 @@ export default {
                 onSelect: (item, index) => {
                     var chas = index+1;
                     _this.model2.tableData[fstIndex].splice(secIndex,1,chas);
+                    this.isspecfg = true;
+                    this.$refs.speccfgdiv.style.opacity = 1;
                 },
                 onCancel: () => {
-                
+                    
                 }
             }).show()
+        },
+        hidespecial(){
+            this.$refs.speccfgdiv.style.opacity = 0;
+            setTimeout(()=>{
+                this.isspecfg = false;
+            },200)
+        },
+        speccfg(){
+
         }
     }
 }
@@ -390,6 +366,8 @@ export default {
     font-size 14px
     .fst-h
         font-weight bold
+        padding-top 10px
+        border-top 1px solid #333333
     .family-input
         width 40%
     .zl-times
@@ -403,6 +381,67 @@ export default {
 .sec-btn
     margin-right 20px
     margin-top 20px
+.special-config
+    position fixed
+    top 0
+    left 0
+    right 0
+    bottom 0
+    overflow hidden
+    transition opacity 0.3s ease
+    opacity 0
+    .mask
+        opacity: 0.4
+        position absolute
+        top 0
+        left 0
+        right 0
+        bottom 0
+        background-color: #25262d
+        pointer-events: auto
+    .cfg
+        position absolute
+        bottom 0
+        left 0
+        width 100%
+        height 200px
+        background-color #ffffff
+        .cfg-title
+            color #000000
+            position relative
+            height 50px
+            border-bottom 1px solid #eeeeee
+            span
+                position absolute
+                top 15px
+            .t1
+                left 50%
+                transform translateX(-50%)
+            .t3
+                right 10px
+                color red
+            .t2
+                left 10px
+                color #333333
+        .cfg-content
+            height 100%
+            width 100%
+            .cfg-content-wrap
+                margin-top 50px
+                text-align center
+                select
+                    width 80px
+                    height 30px
+                input
+                    width 60px
+                    height 30px
+                    border 1px solid rgb(169, 169, 169)
+                    text-indent 1.5em
+
+
+
+
+            
     
 </style>
 

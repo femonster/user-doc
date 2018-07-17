@@ -53,6 +53,19 @@ export default {
             default:function(){
                 return []
             }
+        },
+        special:{
+            type:Object,
+            default:function(){
+                return {
+                    week:0,
+                    period:0,
+                    timeval:{
+                        st:"9:00",
+                        et:"11:00"
+                    }
+                }
+            }
         }
     },
     created(){
