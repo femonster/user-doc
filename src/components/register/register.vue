@@ -8,8 +8,8 @@
                     <cube-form-item :field="fields[0]"></cube-form-item>
                     <cube-form-item :field="fields[1]"></cube-form-item>
                     <cube-form-item :field="fields[2]"></cube-form-item>
-                    <cube-form-item :field="fields[3]"></cube-form-item>
                     <cube-form-item :field="fields[4]"></cube-form-item>
+                    <cube-form-item :field="fields[3]" v-show="model.identity==1"></cube-form-item>
                     <cube-form-item :field="fields[5]" v-show="model.identity==1"></cube-form-item>
                     <cube-form-item :field="fields[6]" v-show="model.identity==2"></cube-form-item>
                     <cube-form-item :field="fields[7]"></cube-form-item>

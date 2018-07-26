@@ -89,7 +89,8 @@ export default {
                     value:"1"
                 },{
                     label:"复诊",
-                    value:"2"
+                    value:"2",
+                    disabled: true
                 }
             ]
         }

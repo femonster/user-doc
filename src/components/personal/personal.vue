@@ -22,34 +22,25 @@
                 </div>
                 <div class="ce2-2">
                     <p>99.1%</p>
-                    <p>好评率</p>
+                    <p>满意度</p>
                 </div>
                 <div class="ce2-3">
                     <p>3,453,345次</p>
                     <p>出诊人数</p>
                 </div>
             </div>
-            <div class="line line-3">
-                <div class="ce3-1">
-                    <p>本月收益：1212300元</p>
-                </div>
-                <div class="ce3-2">
-                    <p>本月收益：56756756元</p>
-                </div>
-            </div>
-            <div class="line line-4">
-                <div class="ce4-1">
-                    <p>可提现金额：1212300元</p>
-                </div>
-                <div class="ce4-2">
-                    <button>我要提现</button>
-                </div>
-            </div>
+        </div>
+        <div class="person-fencai">
+            <label>个人风采：</label>
+            <cube-upload
+            action="//jsonplaceholder.typicode.com/photos/"
+            :simultaneous-uploads="1"
+            @files-added="filesAdded" />
         </div>
         <div class="personal-btns">
+            <router-link :to="`/mdetail`" tag="cube-button">我的财富</router-link>
             <router-link :to="`/pdetail`" tag="cube-button">资料管理</router-link>
             <router-link :to="`/address`" tag="cube-button">地址管理</router-link>
-            <router-link :to="`/mdetail`" tag="cube-button">收益明细</router-link>
             <cube-button>意见反馈</cube-button>
         </div>
     </div>
@@ -59,7 +50,25 @@ import MHeader from 'components/m-header/m-header'
 export default {
     components:{
         MHeader
+    },
+    methods: {
+    filesAdded(files) {
+      let hasIgnore = false
+      const maxSize = 1 * 1024 * 1024 // 1M
+      for (let k in files) {
+        const file = files[k]
+        if (file.size > maxSize) {
+          file.ignore = true
+          hasIgnore = true
+        }
+      }
+      hasIgnore && this.$createToast({
+        type: 'warn',
+        time: 1000,
+        txt: 'You selected >1M files'
+      }).show()
     }
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -86,9 +95,17 @@ export default {
         p
             line-height 1.5
             text-align center
+.person-fencai
+    width 100%
+    padding 10px
+    box-sizing border-box
+    background-color #eeeeee
+    margin-top 10px
 .personal-btns
     button 
         margin 10px 0
+.cube-upload
+    margin-top 10px
 </style>
 
 

@@ -4,28 +4,28 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th>一</th>
-                    <th>二</th>
-                    <th>三</th>
-                    <th>四</th>
-                    <th>五</th>
-                    <th>六</th>
-                    <th>日</th>
+                    <th>上午</th>
+                    <th>下午</th>
+                    <th>晚上</th>
                 </tr>
             </thead>
             <tbody v-if="tableType!=3">
                 <tr v-for="(items,index) in tableData">
-                    <td>{{index==0?"上午":(index==1?"下午":"夜间")}}</td>
+                    <td>{{dayStr[index]}}</td>
                     <td v-for="(item,i) in items" @click.prevent="clickCell(index,item,i)">
-                        {{item==0?"":(item==1?"出诊":"上门")}}
+                        <p>{{item==0?"":(item==1?`出诊`:`上门`)}}</p>
+                        <p>{{item==0?"":`${dataTimes[index][i]}人次`}}</p>
+                        <p>{{special.get(index+"-"+i)}}</p>
                     </td>
                 </tr>
             </tbody>
             <tbody v-if="tableType==3">
                 <tr v-for="(items,index) in tableData">
-                    <td>{{index==0?"上午":(index==1?"下午":"夜间")}}</td>
+                    <td>{{dayStr[index]}}</td>
                     <td v-for="(item,i) in items">
-                        {{item==0?"":(item==1?`出诊-${dataTimes[index][i]}`:`上门-${dataTimes[index][i]}`)}}
+                        <p>{{item==0?"":(item==1?`出诊`:`上门`)}}</p>
+                        <p>{{item==0?"":`${dataTimes[index][i]}人次`}}</p>
+                        <p></p>
                     </td>
                 </tr>
             </tbody>
@@ -34,7 +34,7 @@
 </template>
 <script>
 // tableType 1 医生配置 2 护士配置 3 简报配置
-// tableData 一层 [上午,下午,夜间] 二层 [周一~周日] 0 未填 1 出诊 2 上门
+// tableData 一层[周一~周日] 二层 [上午，下午，夜间] 0 未填 1 出诊 2 上门
 // dataTimes 出诊次数
 export default {
     props:{
@@ -45,30 +45,24 @@ export default {
         tableData:{
             type:Array,
             default:function(){
-                return [[0,1,0,0,0,0,0],[0,2,0,0,0,0,0],[0,0,0,0,0,0,0]]
+                return [[0,1,0],[0,2,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
             }
         },
         dataTimes:{
             type:Array,
             default:function(){
-                return []
+                return  [[0,1,0],[0,2,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
             }
         },
         special:{
-            type:Object,
+            type:Map,
             default:function(){
-                return {
-                    week:0,
-                    period:0,
-                    timeval:{
-                        st:"9:00",
-                        et:"11:00"
-                    }
-                }
+                return new Map()
             }
         }
     },
     created(){
+        this.dayStr = ["一","二","三","四","五","六","日"]
         this.titleTextArr = ["上午","下午","夜间"]
         if(this.tableType==3){
 
@@ -78,9 +72,13 @@ export default {
         clickCell(index,item,i){
             if(this.tableType!=3){
                 this.$emit("checktime",arguments)
+                // index,周几 item (0不填，1出门，2门诊), i (上午还是下午还是晚上)
                 console.log(index,item,i)
             }
             
+        },
+        specialTime(){
+
         }
     }
 }
@@ -97,8 +95,8 @@ export default {
             line-height 1.5
             padding 5px
         td  
-            line-height 45px
             height 45px
+            font-size 12px
 
         
     

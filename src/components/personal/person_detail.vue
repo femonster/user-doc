@@ -94,14 +94,6 @@
                     <cube-textarea></cube-textarea>
                 </div>
             </div> 
-            <div class="align-group">
-                <div class="a-l">
-                    <label>个人风采：</label>
-                </div>
-                <div class="a-r">
-                    
-                </div>
-            </div>
             <cube-checkbox>
                 <p style="font-size:13px;">本人确认所填资料真实有效 <span style="color:red;">审核最长不超过24小时</span></p>
             </cube-checkbox>

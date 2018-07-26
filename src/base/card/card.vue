@@ -18,7 +18,7 @@
                 <p>时间：{{cardData.time}}</p>
                 <p>姓名：{{cardData.uname}}</p>
                 <p>状态：{{cardData.status==0?"未开始":(cardData.status==1?"正在护理":"已完成")}}</p>
-                <cube-button :inline="true" @click="wenzhen">护理</cube-button>
+                <cube-button :inline="true" @click="huli">护理</cube-button>
             </div>
             <div class="todo-r">
                 <div class="todo-bg" :style="`background-image:url(${cardData.avatar})`"></div>
@@ -78,6 +78,9 @@ export default {
     methods:{
             wenzhen(){
                 this.$router.push("/start")
+            },
+            huli(){
+                this.$router.push("/start?t=2")
             }
         }
 }

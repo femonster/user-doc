@@ -5,7 +5,7 @@
             <img src="https://y.gtimg.cn/music/photo_new/T001R300x300M000003CoxJh1zFPpx.jpg?max_age=2592000" alt="patient" class="current">
             <img src="https://y.gtimg.cn/music/photo_new/T001R300x300M000004AlfUb0cVkN1.jpg?max_age=2592000" alt="patient">
             <img src="https://y.gtimg.cn/music/photo_new/T001R300x300M000003DBAjk2MMfhR.jpg?max_age=2592000" alt="patient">
-            <router-link :to="`/conlist`" class="his-link">查看历史咨询</router-link>
+            
         </div>
         <div class="talk-patient">
             <h4>患者信息</h4>
@@ -15,6 +15,7 @@
                 <li>年龄：29</li>
                 <li>既往病史：做过阑尾炎手术</li>
             </ul>
+            <router-link :to="`/conlist`" class="his-link">查看历史咨询</router-link>
             <router-link :to="`/list/123`" class="p-his-link">查看患者病历</router-link>
         </div>
         <div class="talk-contain">
@@ -44,10 +45,6 @@ export default {
         box-sizing border-box
         align-items flex-end
         border-bottom 1px solid #000000
-        .his-link
-            position absolute
-            top 0 
-            right 0
         img 
             width 50px
             margin-right 10px
@@ -62,6 +59,10 @@ export default {
         box-sizing border-box
         border-bottom 1px solid #000000
         line-height 1.8
+        .his-link
+            position absolute
+            top 0 
+            right 0
         .p-his-link
             position absolute
             bottom 0

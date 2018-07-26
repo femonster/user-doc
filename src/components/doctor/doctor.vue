@@ -4,14 +4,16 @@
         <p-header></p-header>
         <div class="now-list">
             <listview :ldata="listData" cardType="1" @select="select"></listview>
-            <cube-button :inline="true" class="closeyy">关闭预约</cube-button>
-            <cube-button :inline="true" @click="toPatient" class="pthuanze">普通患者管理</cube-button>
+            <!-- <cube-button :inline="true" class="closeyy">关闭预约</cube-button> -->
+            <!-- <cube-button :inline="true" @click="toPatient" class="pthuanze">普通患者管理</cube-button> -->
         </div>
         <div class="footer">
-            <cube-button :inline="true" @click="toPatient">家庭患者管理</cube-button>
+            <cube-button :inline="true" @click="toPatient">患者管理</cube-button>
             <cube-button :inline="true" @click="totwzx">图文咨询</cube-button>
-            <cube-button :inline="true" @click="toRefund">退费信息</cube-button>
-            <cube-button :inline="true" @click="toNotice">公告发布</cube-button>
+            <!-- <cube-button :inline="true" @click="toPerson">个人中心</cube-button> -->
+
+            <!-- <cube-button :inline="true" @click="toRefund">退费信息</cube-button> -->
+            <!-- <cube-button :inline="true" @click="toNotice">公告发布</cube-button> -->
         </div>
     </div>
 </template>
@@ -36,17 +38,20 @@ export default {
         select(item) {
             console.log(item)
         },
-        toNotice(){
-            this.$router.push("/notice")
-        },
-        toRefund(){
-            this.$router.push("/refund")
-        },
+        // toNotice(){
+        //     this.$router.push("/notice")
+        // },
+        // toRefund(){
+        //     this.$router.push("/refund")
+        // },
         toPatient(){
             this.$router.push("/patient")
         },
         totwzx(){
             this.$router.push('/consult')
+        },
+        toPerson(){
+            this.$router.push('/personal')
         }
     },
     components:{
@@ -61,7 +66,7 @@ export default {
     .now-list
         width 100%
         position fixed
-        top 110px
+        top 130px
         bottom 50px
         .pthuanze
             position absolute

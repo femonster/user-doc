@@ -36,9 +36,13 @@
 
                         <cube-form-item>
                             <cube-checkbox v-model="model.family.freeReserve.check" id="freeReserve">
-                                <label for="freeReserve">免费预约挂号</label>
+                                <label for="freeReserve">免费图文咨询</label>
                             </cube-checkbox>
-                            <cube-input type="text" v-model="model.family.freeReserve.times"   :disabled="true">
+                            <cube-switch v-model="model.family.freeReserve2.check">
+                                无限次
+                            </cube-switch>
+                            <br>
+                            <cube-input type="text" v-model="model.family.freeReserve.times" v-show="!model.family.freeReserve2.check">
                                 <span slot="append" style="padding-left:10px;">次</span>
                             </cube-input>
                         </cube-form-item>
@@ -52,7 +56,7 @@
                         </cube-form-item>
                         <cube-form-item>
                             <cube-checkbox v-model="model.family.freeConsult.check" id="freeConsult">
-                                <label for="freeConsult">免费图文咨询</label>
+                                <label for="freeConsult">免费预约挂号</label>
                             </cube-checkbox>
                             <cube-input type="number" v-model="model.family.freeConsult.times">
                                 <span slot="append" style="padding-left:10px;">次</span>
@@ -141,7 +145,7 @@
                 </div>
             </div>
             <div class="align-group">
-                <timer-config :tableType=tableType :tableData=model2.tableData @checktime="checktime"></timer-config>
+                <timer-config :tableType=tableType :tableData=model2.tableData :dataTimes="model2.times" @checktime="checktime" :special="detailObj"></timer-config>
             </div>
             <div class="align-group">
                 <div class="a-l">
@@ -167,30 +171,25 @@
         <!-- 具体配置时间 -->
         <div class="special-config" v-show="isspecfg" ref="speccfgdiv">
             <div class="mask"></div>
-            <div class="cfg">
+            <div class="cfg" ref="cfgdiv">
                 <div class="cfg-title">
                     <span class="t1">具体配置</span>
-                    <span class="t2" @click="hidespecial">跳过</span>
+                    <span class="t2" @click="hidespecial">取消</span>
                     <span class="t3" @click="speccfg">确认</span>
                 </div>
-                <div class="cfg-content">
-
+                <div class="cfg-content" ref="timcfg">
+                    <div class="clickdiv menz" ref="menz"  @click="checkType(1)">门诊</div>
+                    <div class="clickdiv shangm" ref="shangm" @click="checkType(2)">上门</div>
                     <div class="cfg-content-wrap">
-                        <select name="" id="">
-                            <option value="9:00">9:00</option>
-                            <option value="10:00">10:00</option>
-                            <option value="11:00">11:00</option>
-                            <option value="12:00">12:00</option>
+                        <select name="" id="" v-model="details">
+                            <option v-for="(item,index) in detailStartArr" :value="item">{{item}}</option>
                         </select>
                         -
-                        <select name="" id="">
-                            <option value="14:00">14:00</option>
-                            <option value="15:00">15:00</option>
-                            <option value="16:00">16:00</option>
-                            <option value="17:00">17:00</option>
+                        <select name="" id="" v-model="detaile">
+                            <option v-for="(item,index) in detailEndArr" :value="item">{{item}}</option>
                         </select>
                         -
-                        <input type="text"/>
+                        <input type="text" v-model="detailTime"/>
                         次
                     </div>
                 </div>
@@ -212,6 +211,13 @@ export default {
             ctbitem:true,
             newAddress:'',
             ishowfamily:false,
+            detailTime:5,
+            whichtime:0,
+            whichweek:0,
+            details:"",
+            detaile:"",
+            detailStartArr:[],
+            detailEndArr:[],
             address: ["北京第一人民医院","北京朝阳区将府家园"],
             model:{
                 reserve:"",
@@ -221,7 +227,10 @@ export default {
                     price:200,
                     freeReserve:{
                         check:true,
-                        times:"无限"
+                        times:0
+                    },
+                    freeReserve2:{
+                        check:true,
                     },
                     freeTohome:{
                         check:true,
@@ -270,9 +279,11 @@ export default {
                     end:"20:00",
                     times:5
                 },
-                tableData:[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]],
+                tableData:[[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]],
+                times: [[5,5,5],[5,5,5],[5,5,5],[5,5,5],[5,5,5],[5,5,5],[5,5,5]],
                 address:""
-            }
+            },
+            detailObj:new Map()
         }
     },
     created(){
@@ -291,6 +302,9 @@ export default {
                 end:["20:00","20:30","21:00","21:30","22:00","22:30","23:00","23:30"],
             }
         }
+
+        this.detailStartArr = this.zltime.morning.start;
+        this.detailEndArr = this.zltime.morning.end;
 
         if(this.$route.query.id==2){
             this.issec = true;
@@ -322,40 +336,54 @@ export default {
         },
         checktime(){
             let args = arguments[0],
-                fstIndex = args[0],
-                secIndex = args[2],
-                val = args[1],
+                fstIndex = args[0], // 周一~周日
+                secIndex = args[2], // 上午，下午，晚上
+                val = args[1], //0 不填 1 门诊 2上门
                 _this = this;
-        this.$createActionSheet({
-                title: '选择方式',
-                pickerStyle: true,
-                data: [
-                {
-                    content: '出诊'
-                },
-                {
-                    content: '上门'
-                }
-                ],
-                onSelect: (item, index) => {
-                    var chas = index+1;
-                    _this.model2.tableData[fstIndex].splice(secIndex,1,chas);
-                    this.isspecfg = true;
-                    this.$refs.speccfgdiv.style.opacity = 1;
-                },
-                onCancel: () => {
-                    
-                }
-            }).show()
+            this.whichtime = secIndex;
+            this.whichweek = fstIndex;
+            if(secIndex==0){
+                this.detailStartArr = this.zltime.morning.start;
+                this.detailEndArr = this.zltime.morning.end;
+                
+            }else if(secIndex==1){
+                this.detailStartArr = this.zltime.afternoon.start;
+                this.detailEndArr = this.zltime.afternoon.end;
+            }else{
+                this.detailStartArr = this.zltime.night.start;
+                this.detailEndArr = this.zltime.night.end;
+            }
+            this.details = this.detailStartArr[0];
+            this.detaile = this.detailEndArr[0];
+            
+            this.isspecfg = true;
+            this.$refs.speccfgdiv.style.opacity = 1;
         },
         hidespecial(){
             this.$refs.speccfgdiv.style.opacity = 0;
             setTimeout(()=>{
                 this.isspecfg = false;
+                this.$refs.cfgdiv.style.transform=`translateY(100px)`;
             },200)
         },
         speccfg(){
-
+            this.model2.tableData[this.whichweek].splice(this.whichtime,1,this.tp);
+            this.model2.times[this.whichweek].splice(this.whichtime,1,this.detailTime);
+            this.detailObj.set(this.whichweek+"-"+this.whichtime,this.details+"-"+this.detaile);
+            this.detailTime = 5;
+            this.$refs.cfgdiv.style.transform=`translateY(100px)`;
+            this.hidespecial();
+        },
+        checkType(tp){
+            this.tp = tp;
+            if(tp==1){
+                this.$refs.shangm.style.backgroundColor="#fff";
+                this.$refs.menz.style.backgroundColor="#eee";
+            }else{
+                this.$refs.shangm.style.backgroundColor="#eee";
+                this.$refs.menz.style.backgroundColor="#fff";
+            }
+            this.$refs.cfgdiv.style.transform=`translateY(0)`;
         }
     }
 }
@@ -404,8 +432,10 @@ export default {
         bottom 0
         left 0
         width 100%
-        height 200px
+        height 300px
         background-color #ffffff
+        transform translateY(100px)
+        transition transform 0.3s ease
         .cfg-title
             color #000000
             position relative
@@ -426,6 +456,13 @@ export default {
         .cfg-content
             height 100%
             width 100%
+            .clickdiv
+                width 100%
+                height 60px
+                line-height 60px
+                box-sizing border-box
+                border-bottom 1px solid #eee
+                text-align center
             .cfg-content-wrap
                 margin-top 50px
                 text-align center

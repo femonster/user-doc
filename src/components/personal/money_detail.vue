@@ -1,7 +1,12 @@
 <template>
         <!--公告列表  -->
     <div class="notice-box">
-        <m-header title="收益信息"></m-header>
+        <m-header title="我的财富"></m-header>
+        <div class="money-detail">
+            <p>本月收益：1212300元</p>
+            <p>本月收益：56756756元</p>
+            <p>可提现金额：1212300元  <button>我要提现</button></p>
+        </div>
         <div class="n-list">
             <listview :ldata="listData" cardType="3" @select="select"></listview>
         </div>
@@ -42,10 +47,18 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+.money-detail
+    padding 10px
+    box-sizing border-box
+    background-color #eeeeee
+    font-size 14px
+    width 100%
+    height 170px
+    line-height 2
 .n-list 
     width 100%
     position fixed
-    top 55px
+    top 170px
     bottom 0
     .add-nbtn
         position absolute
